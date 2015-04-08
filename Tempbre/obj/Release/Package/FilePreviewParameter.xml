@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="timbresp" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Program\ Files\ \(x86\)\\GitHub\\Tempbre\\Tempbre\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\Program\ Files\ \(x86\)\\GitHub\\Tempbre\\Tempbre\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=bzc9y25rkh.database.windows.net,1433;Initial Catalog=DiscoFish;User ID=TimbreSQL;Password=DiscoF1sh" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Program\ Files\ \(x86\)\\GitHub\\Tempbre\\Tempbre\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="DiscoFishEntities-Web.config Connection String" description="" value="metadata=res://*/Models.TimbreModel.csdl|res://*/Models.TimbreModel.ssdl|res://*/Models.TimbreModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=bzc9y25rkh.database.windows.net,1433;Initial Catalog=DiscoFish;User ID=TimbreSQL;Password=DiscoF1sh&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Program\ Files\ \(x86\)\\GitHub\\Tempbre\\Tempbre\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DiscoFishEntities']/@connectionString" />
+  </parameter>
+  <parameter name="DiscoFishEntities1-Web.config Connection String" description="" value="metadata=res://*/Models.Artist-Song.csdl|res://*/Models.Artist-Song.ssdl|res://*/Models.Artist-Song.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=bzc9y25rkh.database.windows.net,1433;initial catalog=DiscoFish;user id=TimbreSQL;password=DiscoF1sh;MultipleActiveResultSets=True&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Program\ Files\ \(x86\)\\GitHub\\Tempbre\\Tempbre\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DiscoFishEntities1']/@connectionString" />
+  </parameter>
+  <parameter name="DiscoFishEntitiesBridges-Web.config Connection String" description="" value="metadata=res://*/Models.Bridges.csdl|res://*/Models.Bridges.ssdl|res://*/Models.Bridges.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=bzc9y25rkh.database.windows.net,1433;Initial Catalog=DiscoFish;User ID=TimbreSQL;Password=DiscoF1sh&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Program\ Files\ \(x86\)\\GitHub\\Tempbre\\Tempbre\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DiscoFishEntitiesBridges']/@connectionString" />
+  </parameter>
+</parameters>

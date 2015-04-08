@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiscoFishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+    </Key>
+    <Property Name="AlbumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReleaseYear" Type="Int32" />
+    <NavigationProperty Name="Artists" Relationship="Self.Albums_Artists" FromRole="Albums" ToRole="Artists" />
+    <NavigationProperty Name="Songs" Relationship="Self.Albums_Songs" FromRole="Albums" ToRole="Songs" />
+  </EntityType>
+  <EntityType Name="Artist">
+    <Key>
+      <PropertyRef Name="ArtistID" />
+    </Key>
+    <Property Name="ArtistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Albums" Relationship="Self.Albums_Artists" FromRole="Artists" ToRole="Albums" />
+    <NavigationProperty Name="Songs" Relationship="Self.Artists_Songs" FromRole="Artists" ToRole="Songs" />
+  </EntityType>
+  <EntityType Name="Song">
+    <Key>
+      <PropertyRef Name="SongID" />
+    </Key>
+    <Property Name="SongID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Album" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Artist" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TrackNumber" Type="Int32" />
+    <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SubGenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsInstrumental" Type="Boolean" />
+    <Property Name="IsScore" Type="Boolean" />
+    <Property Name="Length" Type="Time" Precision="7" />
+    <NavigationProperty Name="Albums" Relationship="Self.Albums_Songs" FromRole="Songs" ToRole="Albums" />
+    <NavigationProperty Name="Artists" Relationship="Self.Artists_Songs" FromRole="Songs" ToRole="Artists" />
+  </EntityType>
+  <Association Name="Albums_Artists">
+    <End Role="Albums" Type="Self.Album" Multiplicity="*" />
+    <End Role="Artists" Type="Self.Artist" Multiplicity="*" />
+  </Association>
+  <Association Name="Albums_Songs">
+    <End Role="Albums" Type="Self.Album" Multiplicity="*" />
+    <End Role="Songs" Type="Self.Song" Multiplicity="*" />
+  </Association>
+  <Association Name="Artists_Songs">
+    <End Role="Artists" Type="Self.Artist" Multiplicity="*" />
+    <End Role="Songs" Type="Self.Song" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="DiscoFishEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Albums" EntityType="Self.Album" />
+    <EntitySet Name="Artists" EntityType="Self.Artist" />
+    <EntitySet Name="Songs" EntityType="Self.Song" />
+    <AssociationSet Name="Albums_Artists" Association="Self.Albums_Artists">
+      <End Role="Albums" EntitySet="Albums" />
+      <End Role="Artists" EntitySet="Artists" />
+    </AssociationSet>
+    <AssociationSet Name="Albums_Songs" Association="Self.Albums_Songs">
+      <End Role="Albums" EntitySet="Albums" />
+      <End Role="Songs" EntitySet="Songs" />
+    </AssociationSet>
+    <AssociationSet Name="Artists_Songs" Association="Self.Artists_Songs">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Songs" EntitySet="Songs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

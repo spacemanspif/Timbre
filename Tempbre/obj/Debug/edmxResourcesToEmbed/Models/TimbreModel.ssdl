@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiscoFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Albums">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+    </Key>
+    <Property Name="AlbumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReleaseYear" Type="int" />
+  </EntityType>
+  <EntityType Name="Albums-Artists">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+      <PropertyRef Name="ArtistID" />
+    </Key>
+    <Property Name="AlbumID" Type="int" Nullable="false" />
+    <Property Name="ArtistID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Albums-Songs">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+      <PropertyRef Name="SongID" />
+    </Key>
+    <Property Name="AlbumID" Type="int" Nullable="false" />
+    <Property Name="SongID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Artists">
+    <Key>
+      <PropertyRef Name="ArtistID" />
+    </Key>
+    <Property Name="ArtistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Artists-Songs">
+    <Key>
+      <PropertyRef Name="ArtistID" />
+      <PropertyRef Name="SongID" />
+    </Key>
+    <Property Name="ArtistID" Type="int" Nullable="false" />
+    <Property Name="SongID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Songs">
+    <Key>
+      <PropertyRef Name="SongID" />
+    </Key>
+    <Property Name="SongID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Album" Type="nvarchar(max)" />
+    <Property Name="Artist" Type="nvarchar(max)" />
+    <Property Name="TrackNumber" Type="int" />
+    <Property Name="Genre" Type="nvarchar(max)" />
+    <Property Name="SubGenre" Type="nvarchar(max)" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="IsInstrumental" Type="bit" />
+    <Property Name="IsScore" Type="bit" />
+    <Property Name="Length" Type="time" Precision="7" />
+  </EntityType>
+  <Association Name="FK_Album-Artists_Albums">
+    <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+    <End Role="Albums-Artists" Type="Self.Albums-Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Albums">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="Albums-Artists">
+        <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Album-Artists_Artists">
+    <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+    <End Role="Albums-Artists" Type="Self.Albums-Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artists">
+        <PropertyRef Name="ArtistID" />
+      </Principal>
+      <Dependent Role="Albums-Artists">
+        <PropertyRef Name="ArtistID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Albums-Songs_Albums">
+    <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+    <End Role="Albums-Songs" Type="Self.Albums-Songs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Albums">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="Albums-Songs">
+        <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Albums-Songs_Songs">
+    <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+    <End Role="Albums-Songs" Type="Self.Albums-Songs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Songs">
+        <PropertyRef Name="SongID" />
+      </Principal>
+      <Dependent Role="Albums-Songs">
+        <PropertyRef Name="SongID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Artists-Songs_Artists">
+    <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+    <End Role="Artists-Songs" Type="Self.Artists-Songs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artists">
+        <PropertyRef Name="ArtistID" />
+      </Principal>
+      <Dependent Role="Artists-Songs">
+        <PropertyRef Name="ArtistID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Artists-Songs_Songs">
+    <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+    <End Role="Artists-Songs" Type="Self.Artists-Songs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Songs">
+        <PropertyRef Name="SongID" />
+      </Principal>
+      <Dependent Role="Artists-Songs">
+        <PropertyRef Name="SongID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DiscoFishModelStoreContainer">
+    <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Albums-Artists" EntityType="Self.Albums-Artists" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Albums-Songs" EntityType="Self.Albums-Songs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Artists" EntityType="Self.Artists" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Artists-Songs" EntityType="Self.Artists-Songs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Songs" EntityType="Self.Songs" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Album-Artists_Albums" Association="Self.FK_Album-Artists_Albums">
+      <End Role="Albums" EntitySet="Albums" />
+      <End Role="Albums-Artists" EntitySet="Albums-Artists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Album-Artists_Artists" Association="Self.FK_Album-Artists_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Albums-Artists" EntitySet="Albums-Artists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Albums-Songs_Albums" Association="Self.FK_Albums-Songs_Albums">
+      <End Role="Albums" EntitySet="Albums" />
+      <End Role="Albums-Songs" EntitySet="Albums-Songs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Albums-Songs_Songs" Association="Self.FK_Albums-Songs_Songs">
+      <End Role="Songs" EntitySet="Songs" />
+      <End Role="Albums-Songs" EntitySet="Albums-Songs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Artists-Songs_Artists" Association="Self.FK_Artists-Songs_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Artists-Songs" EntitySet="Artists-Songs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Artists-Songs_Songs" Association="Self.FK_Artists-Songs_Songs">
+      <End Role="Songs" EntitySet="Songs" />
+      <End Role="Artists-Songs" EntitySet="Artists-Songs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

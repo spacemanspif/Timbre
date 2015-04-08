@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DiscoFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Albums">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+          </Key>
+          <Property Name="AlbumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReleaseYear" Type="int" />
+        </EntityType>
+        <EntityType Name="Albums-Artists">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+            <PropertyRef Name="ArtistID" />
+          </Key>
+          <Property Name="AlbumID" Type="int" Nullable="false" />
+          <Property Name="ArtistID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Albums-Songs">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="AlbumID" Type="int" Nullable="false" />
+          <Property Name="SongID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Artists">
+          <Key>
+            <PropertyRef Name="ArtistID" />
+          </Key>
+          <Property Name="ArtistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Artists-Songs">
+          <Key>
+            <PropertyRef Name="ArtistID" />
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="ArtistID" Type="int" Nullable="false" />
+          <Property Name="SongID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="SongID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Album" Type="nvarchar(max)" />
+          <Property Name="Artist" Type="nvarchar(max)" />
+          <Property Name="TrackNumber" Type="int" />
+          <Property Name="Genre" Type="nvarchar(max)" />
+          <Property Name="SubGenre" Type="nvarchar(max)" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="IsInstrumental" Type="bit" />
+          <Property Name="IsScore" Type="bit" />
+          <Property Name="Length" Type="time" Precision="7" />
+        </EntityType>
+        <Association Name="FK_Album-Artists_Albums">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="Albums-Artists" Type="Self.Albums-Artists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="Albums-Artists">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Album-Artists_Artists">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+          <End Role="Albums-Artists" Type="Self.Albums-Artists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="Albums-Artists">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Albums-Songs_Albums">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="Albums-Songs" Type="Self.Albums-Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="Albums-Songs">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Albums-Songs_Songs">
+          <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+          <End Role="Albums-Songs" Type="Self.Albums-Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="SongID" />
+            </Principal>
+            <Dependent Role="Albums-Songs">
+              <PropertyRef Name="SongID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Artists-Songs_Artists">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+          <End Role="Artists-Songs" Type="Self.Artists-Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="Artists-Songs">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Artists-Songs_Songs">
+          <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+          <End Role="Artists-Songs" Type="Self.Artists-Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="SongID" />
+            </Principal>
+            <Dependent Role="Artists-Songs">
+              <PropertyRef Name="SongID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiscoFishModelStoreContainer">
+          <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Albums-Artists" EntityType="Self.Albums-Artists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Albums-Songs" EntityType="Self.Albums-Songs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Artists" EntityType="Self.Artists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Artists-Songs" EntityType="Self.Artists-Songs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Songs" EntityType="Self.Songs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Album-Artists_Albums" Association="Self.FK_Album-Artists_Albums">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Albums-Artists" EntitySet="Albums-Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Album-Artists_Artists" Association="Self.FK_Album-Artists_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Albums-Artists" EntitySet="Albums-Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Albums-Songs_Albums" Association="Self.FK_Albums-Songs_Albums">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Albums-Songs" EntitySet="Albums-Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Albums-Songs_Songs" Association="Self.FK_Albums-Songs_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="Albums-Songs" EntitySet="Albums-Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Artists-Songs_Artists" Association="Self.FK_Artists-Songs_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Artists-Songs" EntitySet="Artists-Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Artists-Songs_Songs" Association="Self.FK_Artists-Songs_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="Artists-Songs" EntitySet="Artists-Songs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiscoFishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+          </Key>
+          <Property Name="AlbumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReleaseYear" Type="Int32" />
+          <NavigationProperty Name="Artists" Relationship="Self.Albums_Artists" FromRole="Albums" ToRole="Artists" />
+          <NavigationProperty Name="Songs" Relationship="Self.Albums_Songs" FromRole="Albums" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="ArtistID" />
+          </Key>
+          <Property Name="ArtistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Albums" Relationship="Self.Albums_Artists" FromRole="Artists" ToRole="Albums" />
+          <NavigationProperty Name="Songs" Relationship="Self.Artists_Songs" FromRole="Artists" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="SongID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Album" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Artist" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrackNumber" Type="Int32" />
+          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubGenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsInstrumental" Type="Boolean" />
+          <Property Name="IsScore" Type="Boolean" />
+          <Property Name="Length" Type="Time" Precision="7" />
+          <NavigationProperty Name="Albums" Relationship="Self.Albums_Songs" FromRole="Songs" ToRole="Albums" />
+          <NavigationProperty Name="Artists" Relationship="Self.Artists_Songs" FromRole="Songs" ToRole="Artists" />
+        </EntityType>
+        <Association Name="Albums_Artists">
+          <End Role="Albums" Type="Self.Album" Multiplicity="*" />
+          <End Role="Artists" Type="Self.Artist" Multiplicity="*" />
+        </Association>
+        <Association Name="Albums_Songs">
+          <End Role="Albums" Type="Self.Album" Multiplicity="*" />
+          <End Role="Songs" Type="Self.Song" Multiplicity="*" />
+        </Association>
+        <Association Name="Artists_Songs">
+          <End Role="Artists" Type="Self.Artist" Multiplicity="*" />
+          <End Role="Songs" Type="Self.Song" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DiscoFishEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="Artists" EntityType="Self.Artist" />
+          <EntitySet Name="Songs" EntityType="Self.Song" />
+          <AssociationSet Name="Albums_Artists" Association="Self.Albums_Artists">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Artists" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="Albums_Songs" Association="Self.Albums_Songs">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="Artists_Songs" Association="Self.Artists_Songs">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DiscoFishModelStoreContainer" CdmEntityContainer="DiscoFishEntities">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="DiscoFishModel.Album">
+              <MappingFragment StoreEntitySet="Albums">
+                <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="DiscoFishModel.Artist">
+              <MappingFragment StoreEntitySet="Artists">
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="DiscoFishModel.Song">
+              <MappingFragment StoreEntitySet="Songs">
+                <ScalarProperty Name="SongID" ColumnName="SongID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Album" ColumnName="Album" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+                <ScalarProperty Name="TrackNumber" ColumnName="TrackNumber" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="SubGenre" ColumnName="SubGenre" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="IsInstrumental" ColumnName="IsInstrumental" />
+                <ScalarProperty Name="IsScore" ColumnName="IsScore" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Albums_Artists" TypeName="DiscoFishModel.Albums_Artists" StoreEntitySet="Albums-Artists">
+            <EndProperty Name="Albums">
+              <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+            </EndProperty>
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Albums_Songs" TypeName="DiscoFishModel.Albums_Songs" StoreEntitySet="Albums-Songs">
+            <EndProperty Name="Albums">
+              <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+            </EndProperty>
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="SongID" ColumnName="SongID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Artists_Songs" TypeName="DiscoFishModel.Artists_Songs" StoreEntitySet="Artists-Songs">
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+            </EndProperty>
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="SongID" ColumnName="SongID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

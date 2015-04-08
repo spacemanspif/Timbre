@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TimbreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Albums_Artists">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+      <PropertyRef Name="ArtistID" />
+    </Key>
+    <Property Name="AlbumID" Type="Int32" Nullable="false" />
+    <Property Name="ArtistID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Albums_Songs">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+      <PropertyRef Name="SongID" />
+    </Key>
+    <Property Name="AlbumID" Type="Int32" Nullable="false" />
+    <Property Name="SongID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Artists_Songs">
+    <Key>
+      <PropertyRef Name="ArtistID" />
+      <PropertyRef Name="SongID" />
+    </Key>
+    <Property Name="ArtistID" Type="Int32" Nullable="false" />
+    <Property Name="SongID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="DiscoFishEntitiesBridges" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Albums_Artists" EntityType="Self.Albums_Artists" />
+    <EntitySet Name="Albums_Songs" EntityType="Self.Albums_Songs" />
+    <EntitySet Name="Artists_Songs" EntityType="Self.Artists_Songs" />
+  </EntityContainer>
+</Schema>

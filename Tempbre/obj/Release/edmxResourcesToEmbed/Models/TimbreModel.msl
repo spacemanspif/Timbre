@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DiscoFishModelStoreContainer" CdmEntityContainer="DiscoFishEntities">
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="DiscoFishModel.Album">
+        <MappingFragment StoreEntitySet="Albums">
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Artists">
+      <EntityTypeMapping TypeName="DiscoFishModel.Artist">
+        <MappingFragment StoreEntitySet="Artists">
+          <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Songs">
+      <EntityTypeMapping TypeName="DiscoFishModel.Song">
+        <MappingFragment StoreEntitySet="Songs">
+          <ScalarProperty Name="SongID" ColumnName="SongID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Album" ColumnName="Album" />
+          <ScalarProperty Name="Artist" ColumnName="Artist" />
+          <ScalarProperty Name="TrackNumber" ColumnName="TrackNumber" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="SubGenre" ColumnName="SubGenre" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="IsInstrumental" ColumnName="IsInstrumental" />
+          <ScalarProperty Name="IsScore" ColumnName="IsScore" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Albums_Artists" TypeName="DiscoFishModel.Albums_Artists" StoreEntitySet="Albums-Artists">
+      <EndProperty Name="Albums">
+        <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+      </EndProperty>
+      <EndProperty Name="Artists">
+        <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Albums_Songs" TypeName="DiscoFishModel.Albums_Songs" StoreEntitySet="Albums-Songs">
+      <EndProperty Name="Albums">
+        <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+      </EndProperty>
+      <EndProperty Name="Songs">
+        <ScalarProperty Name="SongID" ColumnName="SongID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Artists_Songs" TypeName="DiscoFishModel.Artists_Songs" StoreEntitySet="Artists-Songs">
+      <EndProperty Name="Artists">
+        <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+      </EndProperty>
+      <EndProperty Name="Songs">
+        <ScalarProperty Name="SongID" ColumnName="SongID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

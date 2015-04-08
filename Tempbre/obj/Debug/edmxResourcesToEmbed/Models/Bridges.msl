@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TimbreModelStoreContainer" CdmEntityContainer="DiscoFishEntitiesBridges">
+    <EntitySetMapping Name="Albums_Artists">
+      <EntityTypeMapping TypeName="TimbreModel.Albums_Artists">
+        <MappingFragment StoreEntitySet="Albums-Artists">
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Albums_Songs">
+      <EntityTypeMapping TypeName="TimbreModel.Albums_Songs">
+        <MappingFragment StoreEntitySet="Albums-Songs">
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="SongID" ColumnName="SongID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Artists_Songs">
+      <EntityTypeMapping TypeName="TimbreModel.Artists_Songs">
+        <MappingFragment StoreEntitySet="Artists-Songs">
+          <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+          <ScalarProperty Name="SongID" ColumnName="SongID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
